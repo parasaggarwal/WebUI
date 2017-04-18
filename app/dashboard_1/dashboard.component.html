@@ -1,0 +1,72 @@
+<div class="wrapper">
+    <div class="box box-solid">
+        <div class="box-body" style="position: relative;">
+            <!--<span class="eg">Main Header Example</span>-->
+            <header class="main-header" style="position: relative;">
+                <!-- Logo -->
+                <a href="#" class="logo" style="position: relative;"><b>Connected</b>Car</a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar" role="navigation" style="border: 0;max-height: 50px;">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                </nav>
+            </header>
+            <div id="geoLocationAll" style="padding-top: 30px;">
+                <section>
+                    <div class="input-group input-group-sm">
+                        <input [(ngModel)]="deviceId" type="text" class="form-control" placeholder="Enter Device Id ....">
+                        <span class="input-group-btn">
+                      <button type="button" class="btn btn-info btn-flat" (click)="getSelectedDeviceMap(deviceId)">Go!</button>
+                    </span>
+                    </div><br/><br/>
+
+                    <div id="dashboardMap"   class="small-box bg-red" style="height: 100%">
+                        <div class="inner" style="height: 100%">
+
+                            <!-- <sebm-google-map
+                                    [latitude]="lat"
+                                    [longitude]="lng"
+                                    [zoom]="zoom"
+                                    [disableDefaultUI]="false"
+                                    [zoomControl]="false"
+                                    [usePanning]="true"
+                                    (mapClick)="mapClicked($event)">
+
+                                <sebm-google-map-marker
+
+                                        *ngFor="let m of markers; let i = index"
+                                        (markerClick)="clickedMarker(m.deviceId, i)"
+                                        [latitude]="m.lat"
+                                        [longitude]="m.lng"
+                                        [label]="m.label"
+                                        [markerDraggable]="m.draggable"
+                                        (dragEnd)="markerDragEnd(m, $event)">
+
+                                    <sebm-google-map-info-window>
+                                        <strong style="color: black;">Device Id : <a (click)="getVehicleInfoByDeviceId(selectedDeviceId)"> {{selectedDeviceId}}</a></strong>
+                                    </sebm-google-map-info-window>
+
+                                </sebm-google-map-marker>
+
+                               &lt;!&ndash;  [iconUrl]="carImg" <sebm-google-map-circle [latitude]="lat + 0.3" [longitude]="lng"
+                                                        [radius]="5000"
+                                                        [fillColor]="'red'"
+                                                        [circleDraggable]="false"
+                                                        [editable]="true">
+                                </sebm-google-map-circle>&ndash;&gt;
+
+                            </sebm-google-map>-->
+
+                            <map></map>
+
+                        </div>
+
+                        <!--<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>-->
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
