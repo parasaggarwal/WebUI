@@ -150,49 +150,58 @@ export class InfoComponent implements OnInit{
         console.log('dragEnd', m, $event);
     }
 
-
+    public myVar : any;
 
     getSelectedDeviceMap(deviceId:any){
+        console.log("========getSelectedDeviceMap========");
+        console.log(deviceId);
+        console.log(this.selectedDeviceId);
+        console.log("========getSelectedDeviceMap========");
 
-        setInterval(() => {
+        clearInterval(this.myVar);
+    //    if(this.selectedDeviceId != deviceId){
 
-            this.http.get('http://autoiots1-api.azurewebsites.net/api/TelemetryApi/GetDashboardDevicePaneDataAsync?deviceId='+deviceId)
-                .subscribe(
-                    data => {
-                        console.log("=========Data=======");
+//            clearInterval(this.selectedDeviceId);
+            this.myVar =  setInterval(() => {
 
-                        this.vehicalData = data.json().DeviceTelemetryModel;
-                        console.log( this.vehicalData.Values);
-                        console.log("=========Data=======");
+                this.http.get('http://autoiots1-api.azurewebsites.net/api/TelemetryApi/GetDashboardDevicePaneDataAsync?deviceId='+deviceId)
+                    .subscribe(
+                        data => {
+                            console.log("=========Data=======");
 
-
-
-                        var tempone = this.vehicalData.Values.fuel_consumed_since_restart;
-                        this.vehicleData.fuel_consumed_since_restart = tempone.toString().substr(0,2);
-                        var temptwo = this.vehicalData.Values.vehicle_speed;
-                        this.vehicleData.vehicle_speed = temptwo.toString().substr(0,2);
-                        this.vehicleData.disntance_traveled = 56;
-
-
-                        this.vehicleData.travelDate = '14 April 2017';
-                        this.vehicleData.travelTime = '1 Hr 10Min';
+                            this.vehicalData = data.json().DeviceTelemetryModel;
+                            console.log( this.vehicalData.Values);
+                            console.log("=========Data=======");
 
 
-                        this.markers.push({
-                            lat:parseInt(this.vehicalData.Values.latitude),
-                            lng:parseInt(this.vehicalData.Values.longitude) ,
-                            deviceId:this.vehicalData.DeviceId
-                        });
 
-                        this.selectedDeviceId = deviceId;
-                    },
-                    err => {
-                        console.log("=========err=======");
-                        console.log(err.text());
-                        console.log("=========err=======");
-                    }
-                );
-        }, 5000);
+                            var tempone = this.vehicalData.Values.fuel_consumed_since_restart;
+                            this.vehicleData.fuel_consumed_since_restart = tempone.toString().substr(0,2);
+                            var temptwo = this.vehicalData.Values.vehicle_speed;
+                            this.vehicleData.vehicle_speed = temptwo.toString().substr(0,2);
+                            this.vehicleData.disntance_traveled = 56;
+
+
+                            this.vehicleData.travelDate = '14 April 2017';
+                            this.vehicleData.travelTime = '1 Hr 10Min';
+
+
+                            this.markers.push({
+                                lat:parseInt(this.vehicalData.Values.latitude),
+                                lng:parseInt(this.vehicalData.Values.longitude) ,
+                                deviceId:this.vehicalData.DeviceId
+                            });
+
+                            this.selectedDeviceId = deviceId;
+                        },
+                        err => {
+                            console.log("=========err=======");
+                            console.log(err.text());
+                            console.log("=========err=======");
+                        }
+                    );
+            }, 5000);
+        //}
     }
 }
 

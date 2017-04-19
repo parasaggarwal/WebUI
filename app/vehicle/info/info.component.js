@@ -119,7 +119,14 @@ var InfoComponent = (function () {
     };
     InfoComponent.prototype.getSelectedDeviceMap = function (deviceId) {
         var _this = this;
-        setInterval(function () {
+        console.log("========getSelectedDeviceMap========");
+        console.log(deviceId);
+        console.log(this.selectedDeviceId);
+        console.log("========getSelectedDeviceMap========");
+        clearInterval(this.myVar);
+        //    if(this.selectedDeviceId != deviceId){
+        //            clearInterval(this.selectedDeviceId);
+        this.myVar = setInterval(function () {
             _this.http.get('http://autoiots1-api.azurewebsites.net/api/TelemetryApi/GetDashboardDevicePaneDataAsync?deviceId=' + deviceId)
                 .subscribe(function (data) {
                 console.log("=========Data=======");
@@ -145,6 +152,7 @@ var InfoComponent = (function () {
                 console.log("=========err=======");
             });
         }, 5000);
+        //}
     };
     return InfoComponent;
 }());
